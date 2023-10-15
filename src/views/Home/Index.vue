@@ -8,7 +8,7 @@
 				<img v-show="!isPlay"
 					src="https://dogefs.s3.ladydaily.com/~/source/wallhaven/full/x6/wallhaven-x6ewo3.png?w=1280&h=720&fmt=webp"
 					onerror="this.src='https://fuss10.elemecdn.com/3/28/bbf893f792f03a54408b3b7a7ebf0jpeg.jpeg'"
-					class="align-middle w-full h-full" alt="二次元美图" />
+					class="align-middle w-full h-full" alt="图片加载失败" />
 				<iframe ref="iframe" v-show="isPlay" :src="playAddr" id="iframe" seamless allowfullscreen="true"
 					class="iframe h-full w-full"></iframe>
 				<div class="api-list" v-show="displayList" @click.stop="">
@@ -51,6 +51,7 @@
 					<li><a href="https://v.qq.com/" target="_blank" rel="noopener noreferrer">腾讯视频</a></li>
 					<li><a href="https://www.iqiyi.com/" target="_blank" rel="noopener noreferrer">爱奇艺</a></li>
 					<li><a href="https://youku.com" target="_blank" rel="noopener noreferrer">优酷</a></li>
+					<li><a href="https://www.bilibili.com/" target="_blank" rel="noopener noreferrer">哔哩哔哩</a></li>
 					<li><a href="https://www.mgtv.com" target="_blank" rel="noopener noreferrer">芒果TV</a></li>
 				</ul>
 			</footer>
