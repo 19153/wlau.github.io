@@ -2,7 +2,7 @@
 	<div id="home" class="pb-5">
 		<div class="wrap m-auto min-h-200px">
 			<div class="title whitespace-nowrap">
-				<h1 class="text-xl text-center my-3">vip视频解析</h1>
+				<h1 class="text-xl text-center my-2">$&0__0&$</h1>
 			</div>
 			<div class="container-play m-auto shadow-lg relative">
 				<img v-show="!isPlay"
@@ -70,53 +70,57 @@ const videoParseList = ref([
 	{
 		name: "综合/B站",
 		url: "https://jx.jsonplayer.com/player/?url=",
-		mobile: true,
+		hide: true,
 	},
 	{
 		name: "虾米",
 		url: "https://jx.xmflv.com/?url=",
-		mobile: false,
+		hide: false,
 	},
 	{
 		name: "爱豆",
 		url: "https://jx.aidouer.net/?url=",
-		mobile: true,
+		hide: true,
 	},
 	{
 		name: "OK",
 		url: "https://api.okjx.cc:3389/jx.php?url=",
-		mobile: true,
+		hide: true,
 	},
-	{ name: "OKJX", type: "1,3", url: "https://okjx.cc/?url=", mobile: false },
+	{
+		name: "OKJX", type: "1,3",
+		url: "https://okjx.cc/?url=",
+		hide: false
+	},
 	{
 		name: "yparse",
 		url: "https://jx.yparse.com/index.php?url=",
-		mobile: false,
+		hide: false,
 	},
 	{
 		name: "夜幕",
 		url: "https://www.yemu.xyz/?url=",
-		mobile: false,
+		hide: false,
 	},
 	{
 		name: "M3U8TV",
 		url: "https://jx.m3u8.tv/jiexi/?url=",
-		mobile: true,
+		hide: true,
 	},
 	{
 		name: "8090",
 		url: "https://www.8090g.cn/?url=",
-		mobile: false,
+		hide: false,
 	},
 	{
 		name: "冰豆",
 		url: "https://api.qianqi.net/vip/?url=",
-		mobile: true,
+		hide: true,
 	},
 	{
 		name: "playm3u8",
 		url: "https://www.playm3u8.cn/jiexi.php?url=",
-		mobile: false,
+		hide: false,
 	}
 ]);
 const displayList = ref(false);
@@ -158,7 +162,7 @@ const checkDevice = () => {
 	if (!checkMobile()) return
 	if (checkMobile()) {
 		videoParseList.value = videoParseList.value.filter((item, i, arr) => {
-			return item.mobile
+			return item.hide
 		})
 	}
 	videoParseList.value.splice(0, 0, ...videoParseList.value.splice(1, 1))
