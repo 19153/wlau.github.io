@@ -3,7 +3,7 @@ import { createApp } from 'vue'
 import App from './App.vue'
 // import router from './router/index';
 import 'virtual:windi.css'
-import './styles/app.less';
+// import './styles/app.less';
 import { is_neizhi } from '@/utils/check';
 
 if (is_neizhi()) {

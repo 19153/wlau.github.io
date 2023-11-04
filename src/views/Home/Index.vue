@@ -1,14 +1,18 @@
 <template>
+	<!-- <div class="bg-dark-200 h-5"></div> -->
 	<div id="home" class="pb-5">
-		<div class="wrap m-auto min-h-200px">
+		<div class="wrap m-auto min-h-200px relative">
+			<div class="circle absolute -left-55 -top-20 w-120 h-120 rounded-full -z-9"></div>
+			<div class="circle absolute -right-50 bottom-30 w-100 h-100 rounded-full -z-9"></div>
 			<div class="title whitespace-nowrap">
 				<h1 class="text-xl text-center my-2">$&0__0&$</h1>
 			</div>
-			<div class="container-play m-auto shadow-lg relative">
+			<div class="container-play overflow-hidden shadow-lg">
+				<!-- <Cube /> -->
 				<img v-show="!isPlay"
 					src="https://dogefs.s3.ladydaily.com/~/source/wallhaven/full/x6/wallhaven-x6ewo3.png?w=1280&h=720&fmt=webp"
 					onerror="this.src='https://fuss10.elemecdn.com/3/28/bbf893f792f03a54408b3b7a7ebf0jpeg.jpeg'"
-					class="align-middle w-full h-full" alt="图片加载失败" />
+					class="align-middle opacity-90" alt="图片加载失败" />
 				<iframe ref="iframe" v-show="isPlay" :src="playAddr" id="iframe" seamless allowfullscreen="true"
 					class="iframe h-full w-full"></iframe>
 				<div class="api-list" v-show="displayList" @click.stop="">
@@ -61,6 +65,7 @@
 
 <script setup lang="ts">
 import { ref, onMounted, onBeforeMount, watch } from "vue";
+import Cube from '@/components/Cube.vue';
 import { randomNum } from "@/utils/math";
 const playAddr = ref<string>();
 
@@ -180,16 +185,39 @@ onBeforeMount(() => {
 <style lang="less" scoped>
 .wrap {
 	width: 70vw;
+	// &::before{
+	// 	content: '';
+	// 	display: block;
+	// 	padding: 1px;
+	// 	box-sizing: border-box;
+	// }
 }
 
 .container-play {
 	border: 1px solid silver;
+	box-shadow: 0px 6px 16px 0px rgba(142, 142, 142, 0.2);
+	border-radius: 5px;
 	aspect-ratio: 16/9;
+	background: rgba(101, 101, 101, 0.15);
+	backdrop-filter: blur(10px);
+}
+
+.circle {
+	background: radial-gradient(at 10% 200%, rgb(140, 140, 202) 0%, rgb(167, 197, 198) 80%);
+	box-shadow: 2px 5px 15px 0px rgba(49, 47, 47, 0.1);
+	border: 1px solid rgba(163, 163, 163, 0.3);
+
+	& ~ .circle {
+		background: radial-gradient(at 10% 200%, rgb(114, 188, 196) 0%, rgb(140, 140, 202) 80%);
+	}
 }
 
 .title h1 {
-	background: rgba(134, 127, 127, 0.1);
-	box-shadow: 0px 3px 5px rgb(186, 186, 186);
+	background: rgba(255, 255, 255, 0.3);
+	backdrop-filter: blur(6px);
+	box-shadow: 0px 1px 3px 0px rgba(142, 142, 142, 0.7);
+	border: .8px solid rgba(241, 241, 241, .8);
+	border-radius: 3px;
 	color: rgb(47, 114, 173);
 	text-shadow: 0px 3px 5px rgba(126, 137, 177, 0.529);
 	padding: 3px 0;
@@ -197,10 +225,11 @@ onBeforeMount(() => {
 
 .input {
 	width: 100%;
-	outline: none;
-	background: rgb(251, 251, 251);
-	border: 2px solid rgb(151, 186, 216);
+	outline: 2px solid rgb(151, 186, 216);
+	// border: 2px solid rgb(151, 186, 216);
 	border-radius: 5px;
+	background: rgba(255, 255, 255, 0.3);
+	backdrop-filter: blur(6px);
 
 }
 
@@ -252,7 +281,7 @@ onBeforeMount(() => {
 
 .btn {
 	outline: none;
-	border: 1px solid rgba(147, 112, 216, 0.204);
+	border: 1px solid rgba(147, 112, 216, 0.2);
 	border-radius: 5px;
 	// width: 70px;
 	// height: 30px;
@@ -260,6 +289,11 @@ onBeforeMount(() => {
 	cursor: pointer;
 	margin: 0 3px;
 	transition: all ease-in-out 0.2s;
+
+	button {
+		background: rgba(255, 255, 255, 0.3);
+		backdrop-filter: blur(6px);
+	}
 
 	&:hover {
 		transform: translatey(-1px);

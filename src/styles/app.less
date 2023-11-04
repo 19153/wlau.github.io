@@ -2,6 +2,7 @@ html,
 body,
 #app {
   height: 100%;
+  margin: 0;
 }
 /* 滚动条所在容器 */
 .scroll-container {
@@ -43,9 +44,6 @@ body,
   background: #ededed;
 }
 
-/* 滚动条两端按钮 */
-.scroll-container::-webkit-scrollbar-button {
-}
 div {
   &::-webkit-scrollbar-track {
     -webkit-box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
@@ -65,3 +63,6 @@ div {
     width: 10px;
   }
 }
+// .glass {
+//   backdrop-filter: blur(10%);
+// }
