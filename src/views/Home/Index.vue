@@ -16,7 +16,7 @@
 				<iframe ref="iframe" v-show="isPlay" :src="playAddr" id="iframe" seamless allowfullscreen="true"
 					class="iframe h-full w-full"></iframe>
 				<div class="api-list" v-show="displayList" @click.stop="">
-					<div class="item-wrap absolute bg-light-200 bottom-0px left-0 bg-white">
+					<div class="item-wrap absolute bottom-0px left-0">
 						<div class="item cursor-pointer" v-for="(item, index) in videoParseList" @click="getParseUrl(index)">
 							{{ item.name }}
 						</div>
@@ -207,7 +207,7 @@ onBeforeMount(() => {
 	box-shadow: 2px 5px 15px 0px rgba(49, 47, 47, 0.1);
 	border: 1px solid rgba(163, 163, 163, 0.3);
 
-	& ~ .circle {
+	&~.circle {
 		background: radial-gradient(at 10% 200%, rgb(114, 188, 196) 0%, rgb(140, 140, 202) 80%);
 	}
 }
@@ -233,24 +233,27 @@ onBeforeMount(() => {
 
 }
 
-.api-list {
-	transition: all 0.3s;
-	animation: list-ani 0.2s;
-}
+// .api-list {
+
+// }
 
 @keyframes list-ani {
 	0% {
-		opacity: 0;
+		transform: translate3d(-100%, 100%, 0) scale(0);
 	}
 
 	100% {
-		opacity: 1;
+		transform: translate3d(0, 0, 0) scale(1);
 	}
 }
 
 .item-wrap {
-	background: rgb(242, 242, 242);
-	// border-radius: 15px;
+	// transition: all 0.3s ease-in-out;
+	animation: list-ani 0.2s;
+	// background: rgb(242, 242, 242);
+	border-top-right-radius: 1rem;
+	background: rgba(200, 200, 200, 0.5);
+	backdrop-filter: blur(16px);
 	padding: 10px;
 	display: flex;
 	flex-flow: wrap row;
@@ -271,6 +274,8 @@ onBeforeMount(() => {
 		background: rgba(215, 215, 215, 0.23);
 		box-shadow: inset 0 -4px 8px rgba(148, 185, 222, 0.4);
 		transition: all 0.2s;
+		background: rgba(255, 255, 255, 0.6);
+		// backdrop-filter: blur(6px);
 
 		&:hover {
 			background: rgba(203, 203, 203, 0.4);
@@ -291,8 +296,8 @@ onBeforeMount(() => {
 	transition: all ease-in-out 0.2s;
 
 	button {
-		background: rgba(255, 255, 255, 0.3);
 		backdrop-filter: blur(6px);
+		background: rgba(255, 255, 255, 0.3);
 	}
 
 	&:hover {
