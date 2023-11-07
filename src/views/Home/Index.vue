@@ -2,13 +2,14 @@
 	<!-- <div class="bg-dark-200 h-5"></div> -->
 	<div id="home" class="pb-5">
 		<div class="wrap m-auto min-h-200px relative">
-			<div class="circle absolute -left-55 -top-20 w-120 h-120 rounded-full -z-9"></div>
-			<div class="circle absolute -right-50 bottom-30 w-100 h-100 rounded-full -z-9"></div>
+			<div class="circle fixed -left-25 -top-20 w-120 h-120 rounded-full -z-9"></div>
+			<div class="circle fixed -right-20 bottom-20 w-100 h-100 rounded-full -z-9"></div>
 			<div class="title whitespace-nowrap">
 				<h1 class="text-xl text-center my-2">$&0__0&$</h1>
 			</div>
 			<div class="container-play overflow-hidden shadow-lg">
 				<!-- <Cube /> -->
+				<!-- <div class="loading z-1" v-show="!isPlay"></div> -->
 				<img v-show="!isPlay"
 					src="https://dogefs.s3.ladydaily.com/~/source/wallhaven/full/x6/wallhaven-x6ewo3.png?w=1280&h=720&fmt=webp"
 					onerror="this.src='https://fuss10.elemecdn.com/3/28/bbf893f792f03a54408b3b7a7ebf0jpeg.jpeg'"
@@ -16,7 +17,7 @@
 				<iframe ref="iframe" v-show="isPlay" :src="playAddr" id="iframe" seamless allowfullscreen="true"
 					class="iframe h-full w-full"></iframe>
 				<div class="api-list" v-show="displayList" @click.stop="">
-					<div class="item-wrap absolute bottom-0px left-0">
+					<div class="item-wrap absolute bottom-0 left-0">
 						<div class="item cursor-pointer" v-for="(item, index) in videoParseList" @click="getParseUrl(index)">
 							{{ item.name }}
 						</div>
@@ -51,7 +52,7 @@
 					<p>例如：夸克、小米浏览器、360安全(极速)浏览器等</p>
 				</div>
 				<h3>相关链接</h3>
-				<ul class="origin-links flex justify-center">
+				<ul class="origin-links flex justify-center flex-wrap">
 					<li><a href="https://v.qq.com/" target="_blank" rel="noopener noreferrer">腾讯视频</a></li>
 					<li><a href="https://www.iqiyi.com/" target="_blank" rel="noopener noreferrer">爱奇艺</a></li>
 					<li><a href="https://youku.com" target="_blank" rel="noopener noreferrer">优酷</a></li>
@@ -68,7 +69,6 @@ import { ref, onMounted, onBeforeMount, watch } from "vue";
 import Cube from '@/components/Cube.vue';
 import { randomNum } from "@/utils/math";
 const playAddr = ref<string>();
-
 const videoAddr = ref("");
 const isPlay = ref<boolean>(false);
 const videoParseList = ref([
@@ -86,16 +86,6 @@ const videoParseList = ref([
 		name: "爱豆",
 		url: "https://jx.aidouer.net/?url=",
 		hide: true,
-	},
-	{
-		name: "OK",
-		url: "https://api.okjx.cc:3389/jx.php?url=",
-		hide: true,
-	},
-	{
-		name: "OKJX", type: "1,3",
-		url: "https://okjx.cc/?url=",
-		hide: false
 	},
 	{
 		name: "yparse",
@@ -116,11 +106,6 @@ const videoParseList = ref([
 		name: "8090",
 		url: "https://www.8090g.cn/?url=",
 		hide: false,
-	},
-	{
-		name: "冰豆",
-		url: "https://api.qianqi.net/vip/?url=",
-		hide: true,
 	},
 	{
 		name: "playm3u8",
@@ -170,7 +155,7 @@ const checkDevice = () => {
 			return item.hide
 		})
 	}
-	videoParseList.value.splice(0, 0, ...videoParseList.value.splice(1, 1))
+	// videoParseList.value.splice(0, 0, ...videoParseList.value.splice(1, 1))
 }
 // const getrandomImg = () => {
 // 	const n = [7, 8, 9, 15, 30, 32, 38, 39, 40, 41]
@@ -185,12 +170,6 @@ onBeforeMount(() => {
 <style lang="less" scoped>
 .wrap {
 	width: 70vw;
-	// &::before{
-	// 	content: '';
-	// 	display: block;
-	// 	padding: 1px;
-	// 	box-sizing: border-box;
-	// }
 }
 
 .container-play {
@@ -207,7 +186,7 @@ onBeforeMount(() => {
 	box-shadow: 2px 5px 15px 0px rgba(49, 47, 47, 0.1);
 	border: 1px solid rgba(163, 163, 163, 0.3);
 
-	&~.circle {
+	&:last-child {
 		background: radial-gradient(at 10% 200%, rgb(114, 188, 196) 0%, rgb(140, 140, 202) 80%);
 	}
 }
@@ -228,40 +207,33 @@ onBeforeMount(() => {
 	outline: 2px solid rgb(151, 186, 216);
 	// border: 2px solid rgb(151, 186, 216);
 	border-radius: 5px;
-	background: rgba(255, 255, 255, 0.3);
-	backdrop-filter: blur(6px);
+	background: rgba(255, 255, 255, 0.4);
+	backdrop-filter: blur(5px);
 
 }
 
-// .api-list {
-
-// }
-
-@keyframes list-ani {
+@keyframes api-list {
 	0% {
-		transform: translate3d(-100%, 100%, 0) scale(0);
+		opacity: 0;
 	}
 
 	100% {
-		transform: translate3d(0, 0, 0) scale(1);
+		opacity: 1;
 	}
 }
 
 .item-wrap {
 	// transition: all 0.3s ease-in-out;
-	animation: list-ani 0.2s;
-	// background: rgb(242, 242, 242);
-	border-top-right-radius: 1rem;
+	animation: api-list .2s;
+	border-top-right-radius: .6rem;
 	background: rgba(200, 200, 200, 0.5);
 	backdrop-filter: blur(16px);
 	padding: 10px;
 	display: flex;
 	flex-flow: wrap row;
+	align-content: flex-end;
 	justify-content: space-between;
-	align-items: flex-start;
-	align-content: flex-start;
 	width: 360px;
-	height: auto;
 	overflow-y: auto;
 	overflow-x: hidden;
 
@@ -294,13 +266,16 @@ onBeforeMount(() => {
 	cursor: pointer;
 	margin: 0 3px;
 	transition: all ease-in-out 0.2s;
+	backdrop-filter: blur(6px);
+	background: rgba(255, 255, 255, 0.5);
 
 	button {
-		backdrop-filter: blur(6px);
-		background: rgba(255, 255, 255, 0.3);
+		border: none;
+		background: none;
+		outline: none;
 	}
 
-	&:hover {
+	&:active {
 		transform: translatey(-1px);
 		background: rgba(50, 80, 200, 0.1);
 	}
@@ -308,12 +283,22 @@ onBeforeMount(() => {
 
 .origin-links {
 	li {
-		margin: 0 10px;
+		margin: 0 7px;
+		border-radius: 3px;
+		padding: 0px 5px;
+		text-align: center;
+		background: rgba(255, 255, 255, 0.3);
+		backdrop-filter: blur(10px);
+		box-shadow: inset 0 -4px 8px rgba(148, 185, 222, 0.3);
 
 		a {
-			background: rgba(134, 127, 127, 0.1);
-			color: rgb(47, 114, 173);
-			text-decoration: underline;
+			color: rgba(47, 114, 173, .9);
+
+			&:hover {
+				color: rgba(197, 122, 164, 0.9);
+			}
+
+			// text-decoration: underline;
 		}
 	}
 }
@@ -327,34 +312,77 @@ onBeforeMount(() => {
 
 }
 
-// }
+.loading {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	width: 50px;
+	perspective: 200px;
+}
 
-@media screen and (max-width: 920px) {
-	.wrap {
-		height: auto;
-		width: 100%;
+.loading:before,
+.loading:after {
+	position: absolute;
+	width: 20px;
+	height: 20px;
+	content: "";
+	animation: jumping 0.5s infinite alternate;
+	background: rgba(0, 0, 0, 0);
+}
+
+.loading:before {
+	left: 0;
+}
+
+.loading:after {
+	right: 0;
+	animation-delay: 0.15s;
+}
+
+@keyframes jumping {
+	0% {
+		transform: scale(1) translateY(0px) rotateX(0deg);
+		box-shadow: 0 0 0 rgba(0, 0, 0, 0);
 	}
 
-	.item-wrap {
-		width: 60%;
-		max-width: 200px;
+	100% {
+		transform: scale(1.2) translateY(-25px) rotateX(45deg);
+		background: #000;
+		box-shadow: 0 25px 40px #000;
 	}
 }
 
-@media screen and (max-width: 576px) {
-	.search-inp {
-		justify-content: space-between;
-		flex-wrap: wrap;
+@media screen and (max-width: 920px) {
+	.wrap {
+		width: 100%;
+	}
+
+	.circle:last-child {
+		position: fixed;
+		bottom: 100rem;
 	}
 
 	.item-wrap {
+		width: 30%;
+		min-width: 200px;
 		height: 100%;
-		flex-direction: column;
-		flex-wrap: nowrap;
+		min-height: 50%;
 
 		.item {
 			width: 100%;
 		}
+	}
+}
+
+@media screen and (max-width: 576px) {
+	.wrap {
+		min-width: 300px;
+	}
+
+	.search-inp {
+		justify-content: space-between;
+		flex-wrap: wrap;
 	}
 
 	.input {

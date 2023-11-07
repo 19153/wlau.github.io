@@ -23,11 +23,10 @@ import Home from '@/views/Home/Index.vue';
   z-index: -10;
   width: 100%;
   height: 100vh;
-  background: linear-gradient(135deg, silver, rgb(177, 177, 216) 80%);
-  // background: url(./assets/bg.jpg) no-repeat;
+  background: linear-gradient(135deg, silver, rgb(191, 191, 224) 80%);
+  // background: url(./assets/bg.webp) no-repeat;
   background-size: cover;
-  filter: blur(10px);
-  transform: scale(1.1);
-  // opacity: .6;
+  // filter: blur(10px);
+  // transform: scale(1.1);
 }
 </style>
