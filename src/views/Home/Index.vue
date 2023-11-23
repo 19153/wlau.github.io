@@ -9,11 +9,11 @@
 			</div>
 			<div class="container-play overflow-hidden shadow-lg">
 				<!-- <Cube /> -->
-				<!-- <div class="loading z-1" v-show="!isPlay"></div> -->
-				<img v-show="!isPlay"
+				<div class="loading z-1" v-show="!isPlay"></div>
+				<!-- <img v-show="!isPlay"
 					src="https://dogefs.s3.ladydaily.com/~/source/wallhaven/full/x6/wallhaven-x6ewo3.png?w=1280&h=720&fmt=webp"
 					onerror="this.src='https://fuss10.elemecdn.com/3/28/bbf893f792f03a54408b3b7a7ebf0jpeg.jpeg'"
-					class="align-middle opacity-90" alt="图片加载失败" />
+					class="align-middle opacity-90" alt="图片加载失败" /> -->
 				<iframe ref="iframe" v-show="isPlay" :src="playAddr" id="iframe" seamless allowfullscreen="true"
 					class="iframe h-full w-full"></iframe>
 				<div class="api-list" v-show="displayList" @click.stop="">
@@ -186,7 +186,7 @@ onBeforeMount(() => {
 	box-shadow: 2px 5px 15px 0px rgba(49, 47, 47, 0.1);
 	border: 1px solid rgba(163, 163, 163, 0.3);
 
-	&:last-child {
+	&+.circle {
 		background: radial-gradient(at 10% 200%, rgb(114, 188, 196) 0%, rgb(140, 140, 202) 80%);
 	}
 }
@@ -234,6 +234,7 @@ onBeforeMount(() => {
 	align-content: flex-end;
 	justify-content: space-between;
 	width: 360px;
+
 	overflow-y: auto;
 	overflow-x: hidden;
 
@@ -287,15 +288,13 @@ onBeforeMount(() => {
 		border-radius: 3px;
 		padding: 0px 5px;
 		text-align: center;
-		background: rgba(255, 255, 255, 0.3);
-		backdrop-filter: blur(10px);
-		box-shadow: inset 0 -4px 8px rgba(148, 185, 222, 0.3);
+		border-bottom: 2px solid rgba(105, 108, 198, 0.5);
 
 		a {
-			color: rgba(47, 114, 173, .9);
+			color: rgba(0, 0, 0, 0.9);
 
 			&:hover {
-				color: rgba(197, 122, 164, 0.9);
+				color: rgba(62, 97, 114, 0.9);
 			}
 
 			// text-decoration: underline;
@@ -303,7 +302,6 @@ onBeforeMount(() => {
 	}
 }
 
-// footer {
 .explain {
 	p {
 		transform: scale(0.9);
@@ -358,17 +356,26 @@ onBeforeMount(() => {
 		width: 100%;
 	}
 
-	.circle:last-child {
+	.circle {
+		width: 20rem;
+		height: 20rem;
+	}
+
+	.circle+.circle {
 		position: fixed;
-		bottom: 100rem;
+		top: 5rem;
+		filter: blur(5px);
+	}
+
+	footer :nth-child(n+2) {
+		transform: scale(.92);
 	}
 
 	.item-wrap {
 		width: 30%;
 		min-width: 200px;
 		height: 100%;
-		min-height: 50%;
-
+		align-content: baseline;
 		.item {
 			width: 100%;
 		}
@@ -378,6 +385,11 @@ onBeforeMount(() => {
 @media screen and (max-width: 576px) {
 	.wrap {
 		min-width: 300px;
+	}
+
+	.circle {
+		width: 16rem;
+		height: 16rem;
 	}
 
 	.search-inp {
@@ -415,5 +427,4 @@ onBeforeMount(() => {
 		height: 2.2rem;
 		text-align: center;
 	}
-}
-</style>
+}</style>
